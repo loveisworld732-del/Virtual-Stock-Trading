@@ -13,7 +13,7 @@ class StockApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Wide Monitor Edition (와이드 모니터 에디션)")
-        self.root.geometry("1100x850") 
+        self.root.geometry("1280x850") 
         self.root.state('zoomed') 
         self.root.configure(bg="#f8f9fa")
 
@@ -48,7 +48,7 @@ class StockApp:
         self.label_news.pack()
 
         # --- [Center] Chart Area ([중앙] 차트 영역) ---
-        self.center_area = tk.Frame(root, bg="white", bd=1, relief="solid")
+        self.center_area = tk.Frame(root, bg="#ffffff", bd=1, relief="solid")
         self.center_area.pack(fill="x", padx=30, pady=10)
         self.graph_title = tk.Label(self.center_area, text=f"📊 [{self.current_selected}] Real-time Chart (실시간 차트)", font=("Malgun Gothic", 12, "bold"), bg="white", pady=10)
         self.graph_title.pack()
@@ -69,21 +69,23 @@ class StockApp:
             card = tk.Frame(self.list_frame, bg="white", pady=10, padx=15)
             card.pack(fill="x", pady=4)
             
-            btn_name = tk.Button(card, text=name, font=("Malgun Gothic", 11, "bold"), bg="#ecf0f1", 
-                     width=30, anchor="w",
-                     command=lambda n=name: self.select_stock(n))
-            btn_name.pack(side="left", padx=10)
+            # 1. Stock name (neatly aligned with a width of 32) (1. 종목 이름 (너비 32로 깔끔하게 정돈))
+            btn_name = tk.Button(card, text=name, font=("Malgun Gothic", 11, "bold"), bg="#ecf0f1", width=32, anchor="w", command=lambda n=name: self.select_stock(n))
+            btn_name.pack(side="left", padx=(5, 10))
 
-            price_label = tk.Label(card, text="0 KRW (0.0%) (0원 (0.0%))", font=("Consolas", 12, "bold"), bg="white", width=22, anchor="w")
-            price_label.pack(side="left", padx=10)
+            # 2. Current price display (2. 현재가 표시)
+            price_label = tk.Label(card, text="0 KRW (0.0%)", font=("Consolas", 11, "bold"), bg="white", width=22, anchor="w")
+            price_label.pack(side="left", padx=5)
 
+            # 3. Buy / Sell buttons (3. 매수 / 매도 버튼)
             btn_frame = tk.Frame(card, bg="white")
-            btn_frame.pack(side="left", padx=15)
-            tk.Button(btn_frame, text="Buy (매수)", bg="#e74c3c", fg="white", width=8, font=("Malgun Gothic", 10, "bold"), command=lambda n=name: self.buy_stock(n)).pack(side="left", padx=2)
-            tk.Button(btn_frame, text="Sell (매도)", bg="#3498db", fg="white", width=8, font=("Malgun Gothic", 10, "bold"), command=lambda n=name: self.sell_stock(n)).pack(side="left", padx=2)
+            btn_frame.pack(side="left", padx=5)
+            tk.Button(btn_frame, text="Buy (매수)", bg="#e74c3c", fg="white", width=8, font=("Malgun Gothic", 9, "bold"), command=lambda n=name: self.buy_stock(n)).pack(side="left", padx=2)
+            tk.Button(btn_frame, text="Sell (매도)", bg="#3498db", fg="white", width=8, font=("Malgun Gothic", 9, "bold"), command=lambda n=name: self.sell_stock(n)).pack(side="left", padx=2)
 
-            profit_label = tk.Label(card, text="Not Owned (보유 없음)", font=("Malgun Gothic", 10), bg="white", fg="#95a5a6", width=45, anchor="e")
-            profit_label.pack(side="right", padx=10)
+            # 4. Holdings and average purchase price info (aligned to the right + positioned immediately next to it using side="left"!) (4. 보유 및 평단가 정보 (오른쪽 붙이기 + side="left"로 바로 옆에 이어지게!))
+            profit_label = tk.Label(card, text="Not Owned (보유 없음)", font=("Malgun Gothic", 10), bg="white", fg="#95a5a6", anchor="e")
+            profit_label.pack(side="right", fill="x", expand=True, padx=(10, 5))
             
             self.stock_uis[name] = {"price": price_label, "btn": btn_name, "profit": profit_label}
 
@@ -125,8 +127,8 @@ class StockApp:
                 m_rate = ((data["price"] - data["yesterday_price"]) / data["yesterday_price"]) * 100
                 m_color = "#e74c3c" if m_rate > 0 else ("#3498db" if m_rate < 0 else "black")
                 status_text = f"{data['price']:,} KRW ({m_rate:+.1f}%)"
-                if data["price"] == limit_up: status_text += " [Upper Limit (상)]"
-                if data["price"] == limit_down: status_text += " [Lower Limit (하)]"
+                if data["price"] == limit_up: status_text += " [Upper (상)]"
+                if data["price"] == limit_down: status_text += " [Lower (하)]"
                 self.stock_uis[name]["price"].config(text=status_text, fg=m_color)
 
                 # 4. Update Holdings Info (보유 정보 업데이트)
@@ -224,6 +226,7 @@ class StockApp:
         self.label_money.config(text=f"💰 Balance (잔고): {self.money:,} KRW (원)")
         self.label_news.config(text=f"🌙 Market Closed! Dividends of {div:,} KRW deposited. (장 마감! 배당금 {div:,}원이 입금되었습니다.)", fg="#2c3e50")
         self.root.after(1000, lambda: self.rest_timer(10))
+
 
     def rest_timer(self, sec):
         if sec > 0:
