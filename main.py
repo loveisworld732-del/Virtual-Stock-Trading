@@ -230,7 +230,7 @@ class StockApp:
 
     def rest_timer(self, sec):
         if sec > 0:
-            self.label_timer.config(text=f"🌙 Opening in {sec}s (초 후 개장)", fg="#e74c3c")
+            self.label_timer.config(text=f"🌙 Opening in {sec}s ({sec}초 후 개장)", fg="#e74c3c")
             self.root.after(1000, lambda: self.rest_timer(sec-1))
         else:
             self.day += 1
