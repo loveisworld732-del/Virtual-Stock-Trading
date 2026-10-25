@@ -2,7 +2,7 @@
 
 Welcome to the ultimate Python-based Virtual Stock Trading Simulator! Experience the thrilling world of the stock market right from your terminal or GUI, featuring realistic market mechanics and fast-paced trading rounds.
 
-## Key Features
+## ⭐ Key Features
 * **Real-time Chart & News:** Watch live stock charts and breaking market news updated every **10 seconds**!
 * **Realistic Market Rules:** Implements real-world trading rules including a **±30% price limit (상하한가)** and **dividend payouts**.
 * **Fast-paced 60-second Rounds:** Experience dynamic market shifts in intense 60-second trading intervals.
