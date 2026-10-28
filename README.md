@@ -12,15 +12,14 @@ Welcome to the ultimate Python-based Virtual Stock Trading Simulator! Experience
 * Python 3.x
 * Tkinter (For the sleek Graphical User Interface!)
 
-## 🚀 How to Run
-1. Clone the repository:
-   ```bash
-   git clone https://github.com
-   ```
-2. Run the application:
-   ```bash
-   python main.py
-   ```
+## 📥 How to Download & Run
+
+### 1. For General Users (Recommended!)
+1. Click **[👉 Download dday.exe 📥](https://github.com/loveisworld732-del/advanced-d-day-calculator/releases/latest/download/exchange.exe)** to download the application directly.
+2. click the downloaded `.exe` file to run it. No Python installation required!
+
+### 2. For Developers (Source Code Execution)
+1. **[👉 edit code 👈](https://github.dev/loveisworld732-del/advanced-d-day-calculator/blob/main/main.py)** Click here to edit the code!
 
 ---
 🎈 *This project was built with passion by a 14-year-old developer from South Korea. If you want to support my coding journey, please leave a ⭐ Star! Thank you!*
