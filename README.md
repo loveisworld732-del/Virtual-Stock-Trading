@@ -9,7 +9,7 @@ Welcome to the ultimate Python-based Virtual Stock Trading Simulator! Experience
 * **Smart All-In Feature:** Type `"all"` to easily invest your entire balance instantly!
 
 ## 🛠️ Built With
-* Python 3.x
+* Python 3.14 (64-bit)
 * Tkinter (For the sleek Graphical User Interface!)
 
 ## 📥 How to Download & Run
